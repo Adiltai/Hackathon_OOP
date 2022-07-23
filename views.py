@@ -6,8 +6,8 @@ class Cars():
     like = 0
     comment=None
     FILE='CRUD_Hakaton(copy)/jsondb/data.json'
-    body_type = ("sedan", "universal", "cupe", "hatchback", "minivan", "jeep", "pickup")
-    def init(self,marka,model,year,volume_of_engine,color,typeModel,mileage,price):
+    typeModel = ("sedan", "universal", "cupe", "hatchback", "minivan", "jeep", "pickup")
+    def __init__(self,marka,model,year,volume_of_engine,color,typeModel,mileage,price):
         self.marka=marka
         self.model=model
         self.year=year
@@ -52,7 +52,7 @@ class Cars():
             'year':self.year, 
             'volume_of_engine':self.volume_of_engine, 
             'color':self.color, 
-            'body_type':self.body_type, 
+            'typeModel':self.typeModel, 
             'mileage':self.mileage, 
             'price':self.price,
             'like':Cars.like,
@@ -92,24 +92,36 @@ class Cars():
         cls.send_data_to_json(data)
         return{'status':'200','msg':'Updated'}
     
-
     @classmethod
-    def like_(cls, id):
-        data = cls.listing()
-        machine = cls.get_one_car(data,id)
-        index = data.index(machine)
-        data[index].update(like = 1)
-        cls.send_data_to_json(data)
-        return {'status':'200','msg':'liked'}
+    def get_like(cls, id):
+        try:
+            data = cls.listing()
+            if data[id - 1]['likes'] == 0:
+                data[id - 1]['likes'] += 1
+                print('liked')
+            else:
+                data[id - 1]['likes'] -= 1
+                print('unliked')
+            cls.send_data_to_json(data)
+        except IndexError:
+            print('Нет такого автомобиля')
+    # @classmethod
+    # def like_(cls, id):
+    #     data = cls.listing()
+    #     machine = cls.get_one_car(data,id)
+    #     index = data.index(machine)
+    #     data[index].update(like = 1)
+    #     cls.send_data_to_json(data)
+    #     return {'status':'200','msg':'liked'}
     
-    @classmethod
-    def dislike_(cls, id):
-        data = cls.listing()
-        machine = cls.get_one_car(data,id)
-        index = data.index(machine)
-        data[index].update(like = 0)
-        cls.send_data_to_json(data)
-        return {'status':'200','msg':'disliked'}
+    # @classmethod
+    # def dislike_(cls, id):
+    #     data = cls.listing()
+    #     machine = cls.get_one_car(data,id)
+    #     index = data.index(machine)
+    #     data[index].update(like = 0)
+    #     cls.send_data_to_json(data)
+    #     return {'status':'200','msg':'unliked'}
     
 
     @classmethod

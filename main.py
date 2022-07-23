@@ -1,4 +1,5 @@
-from views import Cars
+import views
+
 
 
 def main():
@@ -10,10 +11,10 @@ def main():
         year=int(input('Year of issue:'))
         volume=float(input('Engine volume:'))
         color=input('Color:')
-        body=(input('Body: '))
+        typeModel=(input('typeModel: '))
         mileage=int(input('Milage:'))
         price=float(input('Price:'))
-        Cars(brand, model, year, volume,color, body, mileage, price).send_car_to_json
+        views.Cars(brand, model, year, volume,color, typeModel, mileage, price).send_car_to_json
         q=input('do u want to continue?(1-yes,2-no)')
         if q=='1':
             main()
