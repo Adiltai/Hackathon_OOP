@@ -1,5 +1,5 @@
-import views
 
+from views import Cars
 
 
 def main():
@@ -14,38 +14,18 @@ def main():
         typeModel=(input('typeModel: '))
         mileage=int(input('Milage:'))
         price=float(input('Price:'))
-        views.Cars(brand, model, year, volume,color, typeModel, mileage, price).send_car_to_json
-        q=input('do u want to continue?(1-yes,2-no)')
-        if q=='1':
-            main()
-        elif q=='2':
-            print('Okay bye!')
-        else:
-            print('Error')
-            main()
+        Cars(brand, model, year, volume,color, typeModel, mileage, price).send_car_to_json
+        
     elif a==2:
         print(Cars.listing())
-        q=int(input('do u want to continue?(1-yes,2-no)'))
-        if q=='1':
-            main()
-        elif q=='2':
-            print('Okay bye!')
-        else:
-            print('Error')
-            main()
+        
 
     elif a==3:
         object=int(input('Enter object index:'))
         print(Cars.retrieve_data(object))
         q=int(input('do u want to continue?(1-yes,2-no)'))
-        if q=='1':
-            main()
-        elif q=='2':
-            print('Okay bye!')
-        else:
-            print('Error')
-            main()
-        
+
+                
     elif a==4:
         id=int(input('Enter object index:'))
         kwargs = {}
@@ -53,37 +33,16 @@ def main():
         val = input('What value do you want to change: ')
         kwargs[obj] = val
         print(Cars.update_data(id, **kwargs))
-        q=int(input('do u want to continue?(1-yes,2-no)'))
-        if q=='1':
-            main()
-        elif q=='2':
-            print('Okay bye!')
-        else:
-            print('Error')
-            main()
-        
+
+                
     elif a==5:
         id=int(input('Enter object index:'))
         print(Cars.delete_data(id))
-        q=int(input('do u want continue?(1-yes,2-no)'))
-        if q=='1':
-            main()
-        elif q=='2':
-            print('Okay bye!')
-        else:
-            print('Error')
-            main()
+        
     elif a == 6:
         id = int(input('Enter object index:'))
         print(Cars.like_(id))
-        q=int(input('do u want to continue?(1-yes,2-no)'))
-        if q=='1':
-            main()
-        elif q=='2':
-            print('Okay bye!')
-        else:
-            print('Error')
-            main()
+        
     elif a==7:
         id=int(input('Enter object index:'))
         kwargs = {}
@@ -91,30 +50,18 @@ def main():
         com = input('What coment do you want to add: ')
         kwargs['comment'] = com
         print(Cars.comments(id, **kwargs))
-        q=int(input('do u want continue?(1-yes,2-no)'))
-        if q=='1':
-            main()
-        elif q=='2':
-            print('Okay bye!')
-        else:
-            print('Error')
-            main()
 
     elif a == 8:
         print('Okay bye!')
         
     else:
-        print('Error')
-        q=int(input('do u want continue?(1-yes,2-no)'))
-        if q=='1':
-            main()
-        elif q=='2':
-            print('Okay bye!')
-        else:
-            print('Error')
-            main()
-        
+        print('Invalid choice!')
+        main()
+    ask = input('do u want continue?\'?(YES/NO)')
+    if ask.lower() == 'yes':
+        main()
+    else:
+        print('Bye!')
+   
     
-
-
 main()
